@@ -13,8 +13,8 @@ jobs:
           echo "$GITHUB_REF"
       - name: Build docker image
         run: |
-          docker build -t alephdata/translate:${GITHUB_SHA} .
+          docker build -t ghcr.io/alephdata/translate:${GITHUB_SHA} .
       - name: Push docker image (master)
         run: |
-          docker login -u ${{ secrets.docker_user }} -p ${{ secrets.docker_password }}
-          docker push alephdata/translate:${GITHUB_SHA}
+          echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
+          docker push ghcr.io/alephdata/translate:${GITHUB_SHA}
