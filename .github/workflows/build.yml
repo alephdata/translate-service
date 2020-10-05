@@ -18,3 +18,5 @@ jobs:
         run: |
           echo ${{ secrets.CR_PAT }} | docker login ghcr.io -u $GITHUB_ACTOR --password-stdin
           docker push ghcr.io/alephdata/translate:${GITHUB_SHA}
+          docker tag ghcr.io/alephdata/translate:${GITHUB_SHA} ghcr.io/alephdata/translate:latest
+          docker push ghcr.io/alephdata/translate:latest
